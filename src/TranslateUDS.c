@@ -1,5 +1,39 @@
 #include "Translate.h"
 
+char	**Loadaddress(void)
+{
+	int		i;
+	int		j;
+	int		fd;
+	char	*buf;
+	char	**tab;
+	char	**addr;
+
+	if ((fd = open("DoIP_Gateway_Settings_BVS.csv", O_RDONLY, S_IRUSR)) <= 0)
+		printf ("Erreur open : fd=%d ", fd);
+	if (!(addr = (char**)malloc(sizeof(char*) * 150)))
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (get_next_line(fd, &buf) != 0)
+	{
+		printf("%s\n", buf);
+		tab = ft_strsplit(buf, ';');
+		if (tab)
+		{
+			while (tab[i] && strlen(tab[i]) > 1)
+			{
+				printf("[%s]\n", tab[i]);
+				if (strlen(tab[i]) > 4 && ft_strncmp(tab[i], "0x", 2))
+					addr[j++] = ft_strdup(tab[i]);
+				i++;
+			}
+			ft_freetab(tab);
+		}
+	}
+	return (addr);
+}
+
 void	TranslateUDS(char **id)
 {
 	char	**trace;
@@ -10,19 +44,19 @@ void	TranslateUDS(char **id)
 		switch (trace[0][0])
 		{
 		case 48:
-			printf("  |  \e[93mSingle Frame\e[39m");
+			printf("  |  \e[33mSingle Frame\e[39m");
 			TranslateSID(trace[1]);
 			break;
 		case 49:
-			printf("  |  \e[94mFirst Frame\e[39m");
+			printf("  |  \e[36mFirst Frame\e[39m ");
 			TranslateSID(trace[2]);
 			break;
 		case 50:
-			printf("  |  \e[92mConsecutive Frame\e[39m");
+			printf("  |  \e[90mConsecutive Frame\e[39m");
 			printf("\n");
 			break;
 		case 51:
-			printf("  |  \e[95mFlow Control\e[39m");
+			printf("  |  \e[90mFlow Control\e[39m");
 			printf("\n");
 			break;
 		default:
@@ -245,7 +279,7 @@ void	TranslateSID(char *byte)
 	}
 	else if (!strcmp(byte, "7F"))
 	{
-		printf("  |  \e[32m\e[32mResponse: Negative Response\e[39m\n");
+		printf("  |  \e[31mResponse: Negative Response\e[39m\n");
 	}
 	else
 		printf("\n");

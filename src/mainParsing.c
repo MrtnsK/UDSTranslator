@@ -14,7 +14,7 @@ char	*GetByte(char **tab)
 	{
 		if (tab[i + 1] == NULL)
 			tab[i][2] = '\0';
-		if (ft_strlen(tab[i]) == 2)
+		if (ft_strlen(tab[i]) == 2 && isxdigit(tab[i][0]) && isxdigit(tab[i][1]))
 		{
 			tmp = reallocstr(ft_strjoin(trace, " "));
 			ft_strdel(&trace);
@@ -28,6 +28,24 @@ char	*GetByte(char **tab)
 	if (trace)
 		return (trace);
 	return (NULL);
+}
+
+int		Idvalid(char *id)
+{
+	int		i;
+	char	**addr;
+
+	i = 0;
+	if (!(addr = Loadaddress()))
+		return (0);
+	while (addr[i])
+	{
+		if (!strcmp(id, addr[i]))
+			return (1);
+		i++;
+	}
+
+	return (0);
 }
 
 char	**GetId(char *str)
@@ -44,7 +62,7 @@ char	**GetId(char *str)
 	while (tab[i])
 	{
 		tmp = ft_strtrim(tab[i]);
-		if (!strcmp(tmp, "14DAF9FCx") || !strcmp(tmp, "14DAFCF9x"))
+		if (Idvalid(tmp))
 		{
 			id[0] = ft_strdup(tmp);
 			id [1] = GetByte(tab);
@@ -78,6 +96,7 @@ int		main(int ac, char **av)
 		while (get_next_line(fd, &buf) != 0)
 		{
 			id = GetId(buf);
+			//printf("%s\n", buf);
 			if (id)
 			{
 				printf("\e[95m%s: %-24s\e[39m", id[0], id[1]);

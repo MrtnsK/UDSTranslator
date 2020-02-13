@@ -42,5 +42,7 @@ char			*reallocstr(char *str);
 void			ft_memdel(void **ap);
 void			TranslateUDS(char **id);
 void			TranslateSID(char *byte);
+int				Idvalid(char *id);
+char			**Loadaddress(void);
 
 #endif
