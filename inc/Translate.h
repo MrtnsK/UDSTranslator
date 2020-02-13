@@ -41,5 +41,6 @@ void			ft_freetab(char **tab);
 char			*reallocstr(char *str);
 void			ft_memdel(void **ap);
 void			TranslateUDS(char **id);
+void			TranslateSID(char *byte);
 
 #endif

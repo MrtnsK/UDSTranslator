@@ -80,7 +80,7 @@ int		main(int ac, char **av)
 			id = GetId(buf);
 			if (id)
 			{
-				printf("%s: %s\n", id[0], id[1]);
+				printf("\e[95m%s: %-24s\e[39m", id[0], id[1]);
 				TranslateUDS(id);
 				ft_freetab(id);
 			}

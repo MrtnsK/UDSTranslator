@@ -18,7 +18,7 @@ INCDIR	= ./inc/
 #SRC
 SRCDIR	= ./src/
 SRC =	utils.c\
-		TranslateUDS.c \
+		TranslateUDS.c\
 		mainParsing.c
 
 #OBJ
