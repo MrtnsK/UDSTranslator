@@ -56,11 +56,11 @@ void	TranslateUDS(char **id)
 		{
 		case 48:
 			printf("  |  \e[33mSingle Frame\e[39m");
-			TranslateSID(trace[1]);
+			TranslateSID(trace[1], trace, id[1]);
 			break;
 		case 49:
 			printf("  |  \e[36mFirst Frame\e[39m ");
-			TranslateSID(trace[2]);
+			TranslateSID(trace[2], trace, id[1]);
 			break;
 		case 50:
 			printf("  |  \e[90mConsecutive Frame\e[39m");
@@ -78,7 +78,7 @@ void	TranslateUDS(char **id)
 	}
 }
 
-void	TranslateSID(char *byte)
+void	TranslateSID(char *byte, char **trace, char *id)
 {
 	if (!strcmp(byte, "10"))
 	{
@@ -92,7 +92,7 @@ void	TranslateSID(char *byte)
 	{
 		printf("  |  \e[34mRequest:  ECU Reset \e[39m\n");
 	}
-	else if (!strcmp(byte, "52"))
+	else if (!strcmp(byte, "51"))
 	{
 		printf("  |  \e[32mResponse: ECU Reset \e[39m\n");
 	}
@@ -100,7 +100,7 @@ void	TranslateSID(char *byte)
 	{
 		printf("  |  \e[34mRequest:  Security Access\e[39m\n");
 	}
-	else if (!strcmp(byte, "37"))
+	else if (!strcmp(byte, "67"))
 	{
 		printf("  |  \e[32mResponse: Security Access\e[39m\n");
 	}
@@ -162,11 +162,11 @@ void	TranslateSID(char *byte)
 	}
 	else if (!strcmp(byte, "22"))
 	{
-		printf("  |  \e[34mRequest:  Read Data By Identifier\e[39m\n");
+		printf("  |  \e[34mRequest:  Read Data By Identifier : \e[95m%s %s\e[39m\n", trace[2], trace[3]);
 	}
 	else if (!strcmp(byte, "62"))
 	{
-		printf("  |  \e[32mResponse: Read Data By Identifier\e[39m\n");
+		printf("  |  \e[32mResponse: Read Data By Identifier : \e[95m%s %s\e[33m%s\e[39m\n", trace[2], trace[3], strlen(id) > 12 ? id + 12 : NULL);
 	}
 	else if (!strcmp(byte, "23"))
 	{

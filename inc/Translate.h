@@ -41,7 +41,7 @@ void			ft_freetab(char **tab);
 char			*reallocstr(char *str);
 void			ft_memdel(void **ap);
 void			TranslateUDS(char **id);
-void			TranslateSID(char *byte);
+void			TranslateSID(char *byte, char **trace, char *id);
 int				Idvalid(char *id, char **addr);
 char			**Loadaddress(void);
 void			ft_strclr(char *s);
