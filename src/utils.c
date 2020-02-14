@@ -1,5 +1,16 @@
 #include "Translate.h"
 
+void	ft_strclr(char *s)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+		s[i++] = '\0';
+}
+
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t i;

@@ -4,6 +4,7 @@ char	**Loadaddress(void)
 {
 	int		i;
 	int		j;
+	int		tmp;
 	int		fd;
 	char	*buf;
 	char	**tab;
@@ -13,24 +14,34 @@ char	**Loadaddress(void)
 		printf ("Erreur open : fd=%d ", fd);
 	if (!(addr = (char**)malloc(sizeof(char*) * 150)))
 		return (NULL);
-	i = 0;
 	j = 0;
 	while (get_next_line(fd, &buf) != 0)
 	{
-		printf("%s\n", buf);
+		tmp = count_word(buf, ';');
 		tab = ft_strsplit(buf, ';');
+		ft_strdel(&buf);
 		if (tab)
 		{
-			while (tab[i] && strlen(tab[i]) > 1)
+			i = 0;
+			while (i < tmp && tab[i])
 			{
-				printf("[%s]\n", tab[i]);
-				if (strlen(tab[i]) > 4 && ft_strncmp(tab[i], "0x", 2))
-					addr[j++] = ft_strdup(tab[i]);
+				if (strlen(tab[i]) > 5 && !ft_strncmp(tab[i], "0x", 2))
+					addr[j++] = ft_strjoin(tab[i] + 2, "x");
+				if (!ft_strncmp(tab[i], "KWP Valve", 9))
+				{
+					addr[j] = NULL;
+					ft_freetab(tab);
+					close(fd);
+					return (addr);
+				}
 				i++;
 			}
 			ft_freetab(tab);
 		}
 	}
+	close(fd);
+	ft_freetab(tab);
+	addr[j] = NULL;
 	return (addr);
 }
 
@@ -63,12 +74,12 @@ void	TranslateUDS(char **id)
 			printf("\n");
 			break;
 		}
+		ft_freetab(trace);
 	}
 }
 
 void	TranslateSID(char *byte)
 {
-	//printf("\t%s", byte);
 	if (!strcmp(byte, "10"))
 	{
 		printf("  |  \e[34mRequest:  Diagnostic Session Control\e[39m\n");

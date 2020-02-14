@@ -30,14 +30,11 @@ char	*GetByte(char **tab)
 	return (NULL);
 }
 
-int		Idvalid(char *id)
+int		Idvalid(char *id, char **addr)
 {
 	int		i;
-	char	**addr;
 
 	i = 0;
-	if (!(addr = Loadaddress()))
-		return (0);
 	while (addr[i])
 	{
 		if (!strcmp(id, addr[i]))
@@ -48,7 +45,7 @@ int		Idvalid(char *id)
 	return (0);
 }
 
-char	**GetId(char *str)
+char	**GetId(char *str, char **addr)
 {
 	char	**id;
 	char	*tmp;
@@ -57,13 +54,13 @@ char	**GetId(char *str)
 	
 	i = 0;
 	tab = ft_strsplit(str, ' ');
-	if (!(id = (char**)malloc(sizeof(char *) * 3)))
-		return (NULL);
 	while (tab[i])
 	{
 		tmp = ft_strtrim(tab[i]);
-		if (Idvalid(tmp))
+		if (Idvalid(tmp, addr))
 		{
+			if (!(id = (char**)malloc(sizeof(char *) * 3)))
+				return (NULL);
 			id[0] = ft_strdup(tmp);
 			id [1] = GetByte(tab);
 			id [2] = NULL;
@@ -83,6 +80,7 @@ int		main(int ac, char **av)
 	int		fd;
 	char	**id;
 	char	*buf;
+	char	**addr;
 
 	if (ac != 2)
 	{
@@ -93,10 +91,11 @@ int		main(int ac, char **av)
 		printf ("Erreur open : fd=%d ", fd);
 	else
 	{
+		addr = Loadaddress();
 		while (get_next_line(fd, &buf) != 0)
 		{
-			id = GetId(buf);
-			//printf("%s\n", buf);
+			id = GetId(buf, addr);
+			ft_strdel(&buf);
 			if (id)
 			{
 				printf("\e[95m%s: %-24s\e[39m", id[0], id[1]);
@@ -104,6 +103,7 @@ int		main(int ac, char **av)
 				ft_freetab(id);
 			}
 		}
+		ft_freetab(addr);
 	}
 	return (0);
 }
