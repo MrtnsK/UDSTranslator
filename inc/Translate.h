@@ -20,6 +20,8 @@ typedef struct		s_file
 	struct s_file	*next;
 }					t_file;
 
+char			**g_ecu;
+
 void			ft_strdel(char **as);
 char			*ft_strnew(size_t size);
 char			*ft_strchr(const char *str, int c);
@@ -40,7 +42,7 @@ char			*ft_strtrim(char const *s);
 void			ft_freetab(char **tab);
 char			*reallocstr(char *str);
 void			ft_memdel(void **ap);
-void			TranslateUDS(char **id);
+void			TranslateUDS(char **id, char **addr);
 void			TranslateSID(char *byte, char **trace, char *id);
 int				Idvalid(char *id, char **addr);
 char			**Loadaddress(void);

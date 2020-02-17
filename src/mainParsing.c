@@ -91,7 +91,8 @@ int		main(int ac, char **av)
 		printf ("Erreur open : fd=%d ", fd);
 	else
 	{
-		addr = Loadaddress();
+		if ((addr = Loadaddress()) == NULL)
+			return (1);
 		while (get_next_line(fd, &buf) != 0)
 		{
 			id = GetId(buf, addr);
@@ -99,11 +100,15 @@ int		main(int ac, char **av)
 			if (id)
 			{
 				printf("\e[95m%s: %-24s\e[39m", id[0], id[1]);
-				TranslateUDS(id);
+				TranslateUDS(id, addr);
 				ft_freetab(id);
 			}
 		}
-		ft_freetab(addr);
+		// for (int e = 0; e < 100; e++){
+		// 	printf("[%s]\n", g_ecu[e]);
+		// }
+		if (addr)
+			ft_freetab(addr);
 	}
 	return (0);
 }
