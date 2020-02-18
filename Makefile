@@ -20,6 +20,9 @@ SRCDIR	= ./src/
 SRC =	utils.c\
 		TranslateUDS.c\
 		mainParsing.c
+SRCWDW =./src/utils.c\
+		./src/TranslateUDS.c\
+		./src/mainParsing.c
 
 #OBJ
 OBJDIR	= ./obj/
@@ -44,5 +47,9 @@ clean:
 
 fclean: clean
 	@/bin/rm -f $(NAME)
+	@/bin/rm -f UDSTranslate.exe
+
+wdw:
+	gcc $(SRCWDW) -I$(INCDIR) -o UDSTranslate.exe
 
 re: fclean all

@@ -78,17 +78,26 @@ char	**GetId(char *str, char **addr)
 int		main(int ac, char **av)
 {
 	int		fd;
+	char	*file;
 	char	**id;
 	char	*buf;
 	char	**addr;
 
-	if (ac != 2)
+	if (ac != 1 && ac != 2)
 	{
-		printf("Usage: ./TranslateUDS.exe [log file]\n");
+		(void)av;
+		printf("Usage: ./TranslateUDS.exe [log file]\nOR\n./TranslateUDS.exe\n$> Path to the file to translate? [log file]\n");
 		return (1);
 	}
-	if ((fd = open(av[1], O_RDONLY, S_IRUSR)) <= 0)
-		printf ("Erreur open : fd=%d ", fd);
+	if (!av[1])
+	{
+		if (!(file = (char*)malloc(sizeof(char) * 150)))
+			return (1);
+		printf("Path to the file to translate ? (Not case sensitive)\n");
+		scanf("%s", file);
+	}
+	if ((fd = open(file ? file : av[1], O_RDONLY, S_IRUSR)) <= 0)
+		printf ("Erreur open : fd=%d\n", fd);
 	else
 	{
 		if ((addr = Loadaddress()) == NULL)
@@ -99,16 +108,19 @@ int		main(int ac, char **av)
 			ft_strdel(&buf);
 			if (id)
 			{
-				printf("\e[95m%s: %-24s\e[39m", id[0], id[1]);
+				printf("%s%s: %-24s%s", LMAGENTA, id[0], id[1], DEFAULT);
 				TranslateUDS(id, addr);
 				ft_freetab(id);
 			}
 		}
-		// for (int e = 0; e < 100; e++){
-		// 	printf("[%s]\n", g_ecu[e]);
-		// }
 		if (addr)
 			ft_freetab(addr);
+	}
+	if (!av[1])
+	{
+		ft_strdel(&file);
+		printf ("Press a Key then Enter (OR Ctrl C) to quit\n");
+		scanf("%s", file);
 	}
 	return (0);
 }

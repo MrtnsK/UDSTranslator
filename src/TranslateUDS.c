@@ -62,30 +62,30 @@ void	TranslateUDS(char **id, char **addr)
 		switch (trace[0][0])
 		{
 		case 48:
-			printf("  |  \e[33mSingle Frame     \e[39m");
+			printf("  |  %sSingle Frame     %s", YELLOW, DEFAULT);
 			TranslateSID(trace[1], trace, id[1]);
 			while (strcmp(addr[i], id[0]))
 				i++;
-			printf("  |  \e[96m%-20s\e[39m\n", g_ecu[i]);
+			printf("  |  %s%-20s%s\n", LCYAN, g_ecu[i], DEFAULT);
 			break;
 		case 49:
-			printf("  |  \e[36mFirst Frame     \e[39m ");
+			printf("  |  %sFirst Frame     %s ", CYAN, DEFAULT);
 			TranslateSID(trace[2], trace, id[1]);
 			while (strcmp(addr[i], id[0]))
 				i++;
-			printf("  |  \e[96m%-20s\e[39m\n", g_ecu[i]);
+			printf("  |  %s%-20s%s\n", LCYAN, g_ecu[i], DEFAULT);
 			break;
 		case 50:
-			printf("  |  \e[90m%-75s\e[39m", "Consecutive Frame");
+			printf("  |  %s%-75s%s", GRAY, "Consecutive Frame", DEFAULT);
 			while (strcmp(addr[i], id[0]))
 				i++;
-			printf("  |  \e[96m%-20s\e[39m\n", g_ecu[i]);
+			printf("  |  %s%-20s%s\n", LCYAN, g_ecu[i], DEFAULT);
 			break;
 		case 51:
-			printf("  |  \e[90m%-75s\e[39m", "Flow Control");
+			printf("  |  %s%-75s%s", GRAY, "Flow Control", DEFAULT);
 			while (strcmp(addr[i], id[0]))
 				i++;
-			printf("  |  \e[96m%-20s\e[39m\n", g_ecu[i]);
+			printf("  |  %s%-20s%s\n", LCYAN, g_ecu[i], DEFAULT);
 			break;
 		default:
 			printf("\n");
@@ -99,215 +99,215 @@ void	TranslateSID(char *byte, char **trace, char *id)
 {
 	if (!strcmp(byte, "10"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Diagnostic Session Control");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Diagnostic Session Control", DEFAULT);
 	}
 	else if (!strcmp(byte, "50"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Diagnostic Session Control");
+		printf("  |  %s%-53s%s", GREEN, "Response: Diagnostic Session Control", DEFAULT);
 	}
 	else if (!strcmp(byte, "11"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  ECU Reset");
+		printf("  |  %s%-53s%s", BLUE, "Request:  ECU Reset", DEFAULT);
 	}
 	else if (!strcmp(byte, "51"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: ECU Reset");
+		printf("  |  %s%-53s%s", GREEN, "Response: ECU Reset", DEFAULT);
 	}
 	else if (!strcmp(byte, "27"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Security Access");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Security Access", DEFAULT);
 	}
 	else if (!strcmp(byte, "67"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Security Access");
+		printf("  |  %s%-53s%s", GREEN, "Response: Security Access", DEFAULT);
 	}
 	else if (!strcmp(byte, "28"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Communication Control");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Communication Control", DEFAULT);
 	}
 	else if (!strcmp(byte, "68"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Communication Control");
+		printf("  |  %s%-53s%s", GREEN, "Response: Communication Control", DEFAULT);
 	}
 	else if (!strcmp(byte, "3E"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Tester Present");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Tester Present", DEFAULT);
 	}
 	else if (!strcmp(byte, "7E"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Tester Present");
+		printf("  |  %s%-53s%s", GREEN, "Response: Tester Present", DEFAULT);
 	}
 	else if (!strcmp(byte, "83"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Access Timing Parameters");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Access Timing Parameters", DEFAULT);
 	}
 	else if (!strcmp(byte, "C3"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Access Timing Parameters");
+		printf("  |  %s%-53s%s", GREEN, "Response: Access Timing Parameters", DEFAULT);
 	}
 	else if (!strcmp(byte, "84"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Secured Data Transmission");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Secured Data Transmission", DEFAULT);
 	}
 	else if (!strcmp(byte, "C4"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Secured Data Transmission");
+		printf("  |  %s%-53s%s", GREEN, "Response: Secured Data Transmission", DEFAULT);
 	}
 	else if (!strcmp(byte, "85"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Control DTC Settings");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Control DTC Settings", DEFAULT);
 	}
 	else if (!strcmp(byte, "C5"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Control DTC Settings");
+		printf("  |  %s%-53s%s", GREEN, "Response: Control DTC Settings", DEFAULT);
 	}
 	else if (!strcmp(byte, "86"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Response On Event");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Response On Event", DEFAULT);
 	}
 	else if (!strcmp(byte, "C6"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Response On Event");
+		printf("  |  %s%-53s%s", GREEN, "Response: Response On Event", DEFAULT);
 	}
 	else if (!strcmp(byte, "87"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Link Control");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Link Control", DEFAULT);
 	}
 	else if (!strcmp(byte, "C7"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Link Control");
+		printf("  |  %s%-53s%s", GREEN, "Response: Link Control", DEFAULT);
 	}
 	else if (!strcmp(byte, "22"))
 	{
-		printf("  |  \e[34m%s \e[95m%s %-14s\e[39m", "Request:  Read Data By Identifier :", trace[2], trace[3]);
+		printf("  |  %s%s %s%s %-14s%s", BLUE, "Request:  Read Data By Identifier :", LMAGENTA, trace[2], trace[3], DEFAULT);
 	}
 	else if (!strcmp(byte, "62"))
 	{
-		printf("  |  \e[32m%s \e[95m%s %s\e[33m%s\e[39m", "Response: Read Data By Identifier :", trace[2], trace[3], strlen(id) > 12 ? id + 12 : NULL);
+		printf("  |  %s%s %s%s %s%s%s%s", GREEN, "Response: Read Data By Identifier :", LMAGENTA, trace[2], trace[3], YELLOW, strlen(id) > 12 ? id + 12 : NULL, DEFAULT);
 	}
 	else if (!strcmp(byte, "23"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Read Memory By Address");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Read Memory By Address", DEFAULT);
 	}
 	else if (!strcmp(byte, "63"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Read Memory By Address");
+		printf("  |  %s%-53s%s", GREEN, "Response: Read Memory By Address", DEFAULT);
 	}
 	else if (!strcmp(byte, "24"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Read Scaling Data By Identifier");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Read Scaling Data By Identifier", DEFAULT);
 	}
 	else if (!strcmp(byte, "64"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Read Scaling Data By Identifier");
+		printf("  |  %s%-53s%s", GREEN, "Response: Read Scaling Data By Identifier", DEFAULT);
 	}
 	else if (!strcmp(byte, "2A"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Read Data By Identifier Periodic");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Read Data By Identifier Periodic", DEFAULT);
 	}
 	else if (!strcmp(byte, "6A"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Read Data By Identifier Periodic");
+		printf("  |  %s%-53s%s", GREEN, "Response: Read Data By Identifier Periodic", DEFAULT);
 	}
 	else if (!strcmp(byte, "2C"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Dynamically Define Data Identifier");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Dynamically Define Data Identifier", DEFAULT);
 	}
 	else if (!strcmp(byte, "6C"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Dynamically Define Data Identifier");
+		printf("  |  %s%-53s%s", GREEN, "Response: Dynamically Define Data Identifier", DEFAULT);
 	}
 	else if (!strcmp(byte, "2E"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Write Data By Identifier");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Write Data By Identifier", DEFAULT);
 	}
 	else if (!strcmp(byte, "6E"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Write Data By Identifier");
+		printf("  |  %s%-53s%s", GREEN, "Response: Write Data By Identifier", DEFAULT);
 	}
 	else if (!strcmp(byte, "3D"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Write Memory By Address");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Write Memory By Address", DEFAULT);
 	}
 	else if (!strcmp(byte, "7D"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Write Memory By Address");
+		printf("  |  %s%-53s%s", GREEN, "Response: Write Memory By Address", DEFAULT);
 	}
 	else if (!strcmp(byte, "14"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Clear Diagnostic Information");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Clear Diagnostic Information", DEFAULT);
 	}
 	else if (!strcmp(byte, "54"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Clear Diagnostic Information");
+		printf("  |  %s%-53s%s", GREEN, "Response: Clear Diagnostic Information", DEFAULT);
 	}
 	else if (!strcmp(byte, "19"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Read DTC Information");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Read DTC Information", DEFAULT);
 	}
 	else if (!strcmp(byte, "59"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Read DTC Information");
+		printf("  |  %s%-53s%s", GREEN, "Response: Read DTC Information", DEFAULT);
 	}
 	else if (!strcmp(byte, "2F"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Input Output Control By Identifier");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Input Output Control By Identifier", DEFAULT);
 	}
 	else if (!strcmp(byte, "6F"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Input Output Control By Identifier");
+		printf("  |  %s%-53s%s", GREEN, "Response: Input Output Control By Identifier", DEFAULT);
 	}
 	else if (!strcmp(byte, "31"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Routine Control");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Routine Control", DEFAULT);
 	}
 	else if (!strcmp(byte, "71"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Routine Control");
+		printf("  |  %s%-53s%s", GREEN, "Response: Routine Control", DEFAULT);
 	}
 	else if (!strcmp(byte, "34"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Request Download");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Request Download", DEFAULT);
 	}
 	else if (!strcmp(byte, "74"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Request Download");
+		printf("  |  %s%-53s%s", GREEN, "Response: Request Download", DEFAULT);
 	}
 	else if (!strcmp(byte, "35"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Request Upload");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Request Upload", DEFAULT);
 	}
 	else if (!strcmp(byte, "75"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Request Upload");
+		printf("  |  %s%-53s%s", GREEN, "Response: Request Upload", DEFAULT);
 	}
 	else if (!strcmp(byte, "36"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Transfer Data");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Transfer Data", DEFAULT);
 	}
 	else if (!strcmp(byte, "76"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Transfer Data");
+		printf("  |  %s%-53s%s", GREEN, "Response: Transfer Data", DEFAULT);
 	}
 	else if (!strcmp(byte, "37"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Request Transfer Exit");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Request Transfer Exit", DEFAULT);
 	}
 	else if (!strcmp(byte, "77"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Request Transfer Exit");
+		printf("  |  %s%-53s%s", GREEN, "Response: Request Transfer Exit", DEFAULT);
 	}
 	else if (!strcmp(byte, "38"))
 	{
-		printf("  |  \e[34m%-53s\e[39m", "Request:  Request File Transfer");
+		printf("  |  %s%-53s%s", BLUE, "Request:  Request File Transfer", DEFAULT);
 	}
 	else if (!strcmp(byte, "78"))
 	{
-		printf("  |  \e[32m%-53s\e[39m", "Response: Request File Transfer");
+		printf("  |  %s%-53s%s", GREEN, "Response: Request File Transfer", DEFAULT);
 	}
 	else if (!strcmp(byte, "7F"))
 	{
-		printf("  |  \e[31m%-53s\e[39m", "Response: Negative Response");
+		printf("  |  %s%-53s%s", RED, "Response: Negative Response", DEFAULT);
 	}
 }
 

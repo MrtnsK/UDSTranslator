@@ -12,6 +12,28 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 
+# ifdef _WIN32
+# define YELLOW ""
+# define LCYAN ""
+# define CYAN ""
+# define GRAY ""
+# define BLUE ""
+# define GREEN ""
+# define RED ""
+# define LMAGENTA ""
+# define DEFAULT ""
+# endif
+# ifdef linux
+# define YELLOW "\e[33m"
+# define LCYAN "\e[96m"
+# define CYAN "\e[36m"
+# define GRAY "\e[90m"
+# define BLUE "\e[34m"
+# define GREEN "\e[32m"
+# define RED "\e[31m"
+# define LMAGENTA "\e[95m"
+# define DEFAULT "\e[39m"
+# endif
 
 typedef struct		s_file
 {
