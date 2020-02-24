@@ -83,6 +83,8 @@ int		main(int ac, char **av)
 	char	*buf;
 	char	**addr;
 
+	file = NULL;
+	g_ecu = NULL;
 	if (ac != 1 && ac != 2)
 	{
 		(void)av;
@@ -115,6 +117,9 @@ int		main(int ac, char **av)
 		}
 		if (addr)
 			ft_freetab(addr);
+		if (g_ecu)
+			ft_freetab(g_ecu);
+		close(fd);
 	}
 	if (!av[1])
 	{

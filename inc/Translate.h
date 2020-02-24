@@ -43,6 +43,7 @@ typedef struct		s_file
 }					t_file;
 
 char			**g_ecu;
+t_file			*g_file;
 
 void			ft_strdel(char **as);
 char			*ft_strnew(size_t size);

@@ -183,6 +183,7 @@ int				ft_clearfile(t_file **file, int fd, int ret)
 		last->next = tofree->next;
 	ft_strdel(&(tofree->buf));
 	free(tofree);
+	free(*file);
 	return (ret);
 }
 
@@ -221,8 +222,8 @@ int				get_next_line(const int fd, char **line)
 	if (fd < 0 || !line || (!file && !(file = ft_newfile(fd))))
 		return (-1);
 	current = ft_findfd(file, fd);
-	if ((!(current->buf) && !(current->buf = ft_strnew(0))) ||
-		!(buffer = ft_strnew(BUFF_SIZE)))
+	if ((!(current->buf) && !(current->buf = ft_strnew(0)))
+		|| !(buffer = ft_strnew(BUFF_SIZE)))
 		return (-1);
 	while (!(r = 0) && !ft_strchr(current->buf, 10) && !ft_strchr(buffer, 10)
 		&& (r = read(fd, buffer, BUFF_SIZE)) > 0)
