@@ -4,7 +4,6 @@
 # define BUFF_SIZE 32
 # include <stdlib.h>
 # include <fcntl.h>
-# include <unistd.h>
 # include <ctype.h>
 # include <string.h>
 # include <stdio.h>
@@ -24,6 +23,7 @@
 # define DEFAULT ""
 # endif
 # ifdef linux
+# include <unistd.h>
 # define YELLOW "\e[33m"
 # define LCYAN "\e[96m"
 # define CYAN "\e[36m"

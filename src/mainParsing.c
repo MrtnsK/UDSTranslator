@@ -98,7 +98,7 @@ int		main(int ac, char **av)
 		printf("Path to the file to translate ? (Not case sensitive)\n");
 		scanf("%s", file);
 	}
-	if ((fd = open(file ? file : av[1], O_RDONLY, S_IRUSR)) <= 0)
+	if ((fd = open(file ? file : av[1], O_RDONLY)) <= 0)
 		printf ("Erreur open : fd=%d\n", fd);
 	else
 	{

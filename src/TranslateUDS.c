@@ -10,7 +10,7 @@ char	**Loadaddress(void)
 	char	**tab;
 	char	**addr;
 
-	if ((fd = open("id_ecu.csv", O_RDONLY, S_IRUSR)) <= 0)
+	if ((fd = open("id_ecu.csv", O_RDONLY)) <= 0)
 	{
 		printf ("\e[31mid_ecu.csv is missing\n");
 		return (NULL);
