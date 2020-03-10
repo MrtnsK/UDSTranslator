@@ -30,18 +30,24 @@ char	*GetByte(char **tab)
 	return (NULL);
 }
 
-int		Idvalid(char *id, char **addr)
+int		Idvalid(char **id, char **addr)
 {
 	int		i;
+	char	*tmp;
 
 	i = 0;
+	if (strlen((*id)) == 10 && (*id)[0] == '0' && (*id)[1] == 'x')
+	{
+		tmp = ft_strjoin((*id) + 2, "x\0");
+		ft_strdel(&(*id));
+		(*id) = reallocstr(tmp);
+	}
 	while (addr[i])
 	{
-		if (!strcmp(id, addr[i]))
+		if (!strcmp((*id), addr[i]))
 			return (1);
 		i++;
 	}
-
 	return (0);
 }
 
@@ -57,7 +63,7 @@ char	**GetId(char *str, char **addr)
 	while (tab[i])
 	{
 		tmp = ft_strtrim(tab[i]);
-		if (Idvalid(tmp, addr))
+		if (Idvalid(&tmp, addr))
 		{
 			if (!(id = (char**)malloc(sizeof(char *) * 3)))
 				return (NULL);
