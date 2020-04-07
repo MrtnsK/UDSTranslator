@@ -270,9 +270,9 @@ void	ft_freetab(char **tab)
 	int		i;
 
 	i = 0;
-	while (tab[i])
+	while (tab[i] != NULL)
 		ft_strdel(&tab[i++]);
-	free(tab);
+	free(*tab);
 	tab = NULL;
 }
 
